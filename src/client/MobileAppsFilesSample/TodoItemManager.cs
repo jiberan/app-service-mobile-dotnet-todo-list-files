@@ -59,7 +59,8 @@ namespace MobileAppsFilesSample
         {
             ReadOnlyCollection<MobileServiceTableOperationError> syncErrors = null;
 
-            try {
+            try
+            {
 //                await this.client.SyncContext.PushAsync();
 
                 // FILES: Push file changes
@@ -69,10 +70,16 @@ namespace MobileAppsFilesSample
                 // A normal pull will automatically process new/modified/deleted files, engaging the file sync handler
                 await this.todoTable.PullAsync("todoItems", this.todoTable.CreateQuery());
             }
-            catch (MobileServicePushFailedException exc) {
-                if (exc.PushResult != null) {
+            catch (MobileServicePushFailedException exc)
+            {
+                if (exc.PushResult != null)
+                {
                     syncErrors = exc.PushResult.Errors;
                 }
+            }
+            catch (Exception ex)
+            {
+                
             }
 
             // Simple error/conflict handling. A real application would handle the various errors like network conditions,

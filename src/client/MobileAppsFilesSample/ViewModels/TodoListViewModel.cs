@@ -116,8 +116,15 @@ namespace MobileAppsFilesSample.ViewModels
 
         public async Task SyncItemsAsync()
         {
-            await manager.SyncAsync();
-            await LoadItems();
+            try
+            {
+                await manager.SyncAsync();
+                await LoadItems();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         private async void AddItem(object data)

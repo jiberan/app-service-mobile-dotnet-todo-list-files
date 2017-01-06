@@ -28,7 +28,7 @@ namespace MobileAppsFilesSample
             InitializeComponent();
 
             // OnPlatform<T> doesn't currently support the "Windows" target platform, so we have this check here.
-            if (Device.OS == TargetPlatform.Windows || Device.OS == TargetPlatform.WinPhone)
+            if (Device.OS == TargetPlatform.Windows || Device.OS == TargetPlatform.Android)
             {
                 syncButton.IsVisible = true;
             }
@@ -66,9 +66,11 @@ namespace MobileAppsFilesSample
 
         public async void OnSyncItems(object sender, EventArgs e)
         {
+            syncButton.IsVisible = false;
             using (var scope = new ActivityIndicatorScope(syncIndicator, true)) {
                 await ViewModel.SyncItemsAsync();
             }
+            syncButton.IsVisible = true;
         }
 
         private class ActivityIndicatorScope : IDisposable
